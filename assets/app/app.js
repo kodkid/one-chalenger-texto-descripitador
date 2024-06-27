@@ -30,3 +30,63 @@ const decrypt = (text) => {
         .replaceAll('ufat', 'u');
 };
 
+const validateText = (text) => {
+  return !/[A-ZÀ-ü]/.test(text);
+}; 
+
+const removeBoxAlert = () => {
+  const box = document.querySelector('body div.container div.box-alert');
+  if(box) {
+    document.querySelector('body div.container').removeChild(invalidTextAlertBox);
+    clearTimeout(removeBoxAlertIn10Seconds);
+  }
+};
+
+btnEncrypt.addEventListener('click', () => {
+  const isValidText = validateText(input.value);
+  if(input.value && isValidText) {
+    output.innerHTML = `<div class="text-output">${encrypt(input.value)}</div>`;
+    output.append(btnCopy);
+    if (btnCopy.disabled) {
+      btnCopy.innerText = 'Copiar';
+      btnCopy.disabled = false;
+    } 
+  } else {
+    if(removeBoxAlertIn10Seconds) {
+      clearTimeout(removeBoxAlertIn10Seconds);
+    }
+    const body = document.querySelector('body div.container');
+    body.append(invalidTextAlertBox);
+    removeBoxAlertIn10Seconds = setTimeout(() => {
+      document.querySelector('body div.container').removeChild(invalidTextAlertBox);
+    }, 10 * 1000);
+  }
+});
+
+btnDecrypt.addEventListener('click', () => {
+  const isValidText = validateText(input.value);
+  if(input.value && isValidText) {
+    output.innerHTML = `<div class="text-output">${decrypt(input.value)}</div>`;
+    output.append(btnCopy);
+    if (btnCopy.disabled) {
+      btnCopy.innerText = 'Copiar';
+      btnCopy.disabled = false;
+    }
+  } else {
+    if(removeBoxAlertIn10Seconds) {
+      clearTimeout(removeBoxAlertIn10Seconds);
+    }
+    const body = document.querySelector('body div.container');
+    body.append(invalidTextAlertBox);
+    removeBoxAlertIn10Seconds = setTimeout(() => {
+      document.querySelector('body div.container').removeChild(invalidTextAlertBox);
+    }, 10 * 1000);
+  }
+});
+
+btnCopy.addEventListener('click', () => {
+  const text = document.querySelector('div.text-output').innerText;
+  navigator.clipboard.writeText(text);
+  btnCopy.innerText = 'Copiado!'
+  btnCopy.disabled = true;
+});
