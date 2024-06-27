@@ -1,0 +1,10 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    display: center;
+    justify-content: center;
+    align-items: center;
+}
