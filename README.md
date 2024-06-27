@@ -1,4 +1,4 @@
-# Desafio Challenger da One-Oracle Cinistrado pela Alura
+# Desafio Challenger da One-Oracle Ministrado pela Alura
 
 Este projeto visa o desenvolvimento de um Descriptografador de texto com base nos aprendizados concedidos pela Oracle One Next Education.
 
